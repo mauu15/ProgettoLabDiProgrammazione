@@ -1,0 +1,14 @@
+//
+// Created by Maurizio Mazza on 14/10/24.
+//
+
+#ifndef PROGETTOLABDIPROGRAMMAZIONE_FOLDER_H
+#define PROGETTOLABDIPROGRAMMAZIONE_FOLDER_H
+
+
+class Folder {
+
+};
+
+
+#endif //PROGETTOLABDIPROGRAMMAZIONE_FOLDER_H
