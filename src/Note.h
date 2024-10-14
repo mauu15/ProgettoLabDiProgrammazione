@@ -14,9 +14,15 @@ public:
     // Costruttore
     Note(std::string  title, std::string  text, bool isLocked = false);
 
-    // Metodi per ottenere il titolo e il testo
-    std::string getTitle() const;
+    // Getters
+    std::string getTitle() const; //Primo const: il valore ritornato è costante. Secondo const: non modifica lo
+    // stato dell'oggetto su cui viene chiamata
+
     std::string getContent() const;
+
+    // Setters
+    void setTitle(const std::string &inTitle);
+    void setContent(const std::string &inContent);
 
     // Metodi per gestire i preferiti
     void addToFavorites();

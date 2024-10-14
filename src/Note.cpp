@@ -16,6 +16,18 @@ std::string Note::getContent() const {
     return text;
 }
 
+void Note::setTitle(const std::string &newTitle) {
+    if (!isLocked()) {
+        title = newTitle;
+    }
+}
+
+void Note::setContent(const std::string &newText) {
+    if (!isLocked()) {
+        text = newText;
+    }
+}
+
 // Restituisce true se la nota è bloccata
 bool Note::isLocked() const {
     return locked;
