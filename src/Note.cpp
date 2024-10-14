@@ -61,3 +61,8 @@ void Note::lock() {
 void Note::unlock() {
     locked = false;
 }
+
+bool Note::operator==(const Note& other) const {
+    return title == other.title && text == other.text &&
+           isLocked() == other.isLocked() && isFavorite() == other.isFavorite();
+}

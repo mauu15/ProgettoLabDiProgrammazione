@@ -36,6 +36,8 @@ public:
     // Metodo per controllare se la nota è bloccata
     bool isLocked() const;
 
+    bool operator==(const Note& other) const; // Overloading dell'operatore di uguaglianza, per confrontare due note
+
 };
 
 #endif // NOTE_H
