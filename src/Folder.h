@@ -4,8 +4,8 @@
 #include <string>
 #include <list>
 #include "Note.h"
-// #include "Observer.h"
-// #include "Subject.h"
+#include "Observer.h"
+#include "Subject.h"
 
 class Folder : public Subject {
 private:
@@ -13,7 +13,7 @@ private:
 
 protected:
     std::string name;                   // Nome del folder
-    std::list<Note> notesList;          // Lista di note
+    std::list<Note> notesList;   // Lista di note
     static std::list<Note> favoriteNotes; // Lista di note preferite (static)
     static std::list<Note> blockedNotes;  // Lista di note bloccate (static)
 
@@ -44,15 +44,15 @@ public:
 
     // Metodi per Gestione dei Preferiti
     static bool makeFavourite(Note &note);
-    static bool removeFavourite(const std::string &title);
-    static void clearFavoriteNotes();
+    bool removeFavorite(const std::string &title);
+
     static int getFavouriteSize();
     std::list<Note> listFavorites() const;
 
     // Metodi per Gestione delle Note Bloccate
-    void blockNote(const Note &note);
+    void blockNote(Note &note);
     void unlockNote(const Note &note);
-    static void clearBlockedNotes();
+
     static int getBlockedSize();
     std::list<Note> listBlocked() const;
 
