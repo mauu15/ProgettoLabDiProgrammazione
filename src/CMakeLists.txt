@@ -1,4 +1,6 @@
-add_library(Note Note.cpp Folder.cpp)
+add_library(Note Note.cpp Folder.cpp
+        Subject.h
+        Observer.h)
 
 # Abilita Google Test se non è già stato fatto in tst
 include(FetchContent)
