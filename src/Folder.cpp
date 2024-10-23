@@ -101,11 +101,10 @@ std::list<Note> Folder::findNotes(const std::string &keyword) const {
     return result;
 }
 
-// Blocca una nota
-void Folder::blockNote(const Note &note) {
-    if (!note.isLocked()) {
-        blockedNotes.push_back(note);
-    }
+// Metodo per bloccare una nota
+void Folder::blockNote(Note &note) {
+    note.lock();
+    blockedNotes.push_back(note);
 }
 
 // Sblocca una nota
@@ -124,34 +123,32 @@ bool Folder::makeFavourite(Note &note) {
 }
 
 // Rimuove una nota dai preferiti
-bool Folder::removeFavourite(const std::string &title) {
-    auto it = std::find_if(favoriteNotes.begin(), favoriteNotes.end(),
-                           [&title](const Note &note) { return note.getTitle() == title; });
+bool Folder::removeFavorite(const std::string &title) {
+    auto it = std::find_if(favoriteNotes.begin(), favoriteNotes.end(), [&](const Note& n){ return n.getTitle() == title; });
+
     if (it != favoriteNotes.end()) {
-        favoriteNotes.erase(it);
-        return true;
+        if (!it->isLocked()) {
+            it->removeFromFavorites();  // Aggiorna lo stato della nota
+            favoriteNotes.erase(it);     // Rimuove la nota dai preferiti
+            return true;
+        } else {
+            std::cout << "Stai cercando di cancellare dai preferiti una nota bloccata. Se desideri proseguire, prima dovrai procedere a sbloccarla." << std::endl;
+            return false;
+        }
     }
+
+    std::cout << "Nota non trovata nei preferiti." << std::endl;
     return false;
 }
 
 // Restituisce la lista delle note bloccate
-std::list<Note> Folder::listBlocked() const {
+std::list<Note> Folder::listBlocked() {
     return blockedNotes;
 }
 
 // Restituisce la lista delle note preferite
-std::list<Note> Folder::listFavorites() const {
+std::list<Note> Folder::listFavorites() {
     return favoriteNotes;
-}
-
-// Pulisce la lista delle note preferite
-void Folder::clearFavoriteNotes() {
-    favoriteNotes.clear();
-}
-
-// Pulisce la lista delle note bloccate
-void Folder::clearBlockedNotes() {
-    blockedNotes.clear();
 }
 
 // Restituisce la dimensione delle note preferite

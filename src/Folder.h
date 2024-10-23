@@ -44,17 +44,17 @@ public:
 
     // Metodi per Gestione dei Preferiti
     static bool makeFavourite(Note &note);
-    bool removeFavorite(const std::string &title);
+    static bool removeFavorite(const std::string &title);
 
     static int getFavouriteSize();
-    std::list<Note> listFavorites() const;
+    static std::list<Note> listFavorites() ;
 
     // Metodi per Gestione delle Note Bloccate
-    void blockNote(Note &note);
-    void unlockNote(const Note &note);
+    static void blockNote(Note &note);
+    static void unlockNote(const Note &note);
 
     static int getBlockedSize();
-    std::list<Note> listBlocked() const;
+    static std::list<Note> listBlocked() ;
 
     // Metodi per Gestione degli Osservatori
     void addObserver(Observer *o) override;
