@@ -1,7 +1,5 @@
 #include "gtest/gtest.h"
 #include "../src/Folder.h"
-#include "../src/Note.h"
-#include "../src/Observer.h"
 
 // Test per il costruttore di Folder
 TEST(FolderTest, Constructor) {
@@ -64,8 +62,21 @@ TEST(FolderTest, BlockNote) {
     Folder folder("TestFolder");
     Note note1("Title1", "Content1");
 
-    folder.blockNote(note1);
+    Folder::blockNote(note1);
     ASSERT_TRUE(note1.isLocked());
+}
+
+// Test per sbloccare una nota
+TEST(FolderTest, UnlockNote) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+
+    folder.addNote(note1);
+    Folder::blockNote(note1);
+    ASSERT_TRUE(note1.isLocked());
+
+    Folder::unlockNote(note1);
+    ASSERT_FALSE(note1.isLocked());
 }
 
 // Test per aggiungere una nota ai preferiti
@@ -121,3 +132,58 @@ TEST(FolderTest, FindNotes) {
     ASSERT_EQ(results.front().getTitle(), "Important");
 }
 
+// Test per ottenere la lista delle note preferite
+TEST(FolderTest, ListFavorites) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+    Note note2("Title2", "Content2");
+
+    folder.addNote(note1);
+    folder.addNote(note2);
+
+    Folder::makeFavourite(note1);
+    Folder::makeFavourite(note2);
+
+    auto favorites = Folder::listFavorites();
+    ASSERT_EQ(favorites.size(), 2);
+    ASSERT_TRUE(std::find_if(favorites.begin(), favorites.end(), [&](const Note& n){ return n.getTitle() == "Title1"; }) != favorites.end());
+    ASSERT_TRUE(std::find_if(favorites.begin(), favorites.end(), [&](const Note& n){ return n.getTitle() == "Title2"; }) != favorites.end());
+}
+
+// Test per ottenere la lista delle note bloccate
+TEST(FolderTest, ListBlocked) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+    Note note2("Title2", "Content2");
+
+    folder.addNote(note1);
+    folder.addNote(note2);
+
+    Folder::blockNote(note1);
+    Folder::blockNote(note2);
+
+    auto blocked = Folder::listBlocked();
+    ASSERT_EQ(blocked.size(), 2);
+    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(), [&](const Note& n){ return n.getTitle() == "Title1"; }) != blocked.end());
+    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(), [&](const Note& n){ return n.getTitle() == "Title2"; }) != blocked.end());
+}
+
+// Test per modificare il testo di una nota
+TEST(FolderTest, EditNoteText) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+
+    folder.addNote(note1);
+    ASSERT_TRUE(folder.editNoteText(note1, "NewContent1"));
+    ASSERT_EQ(note1.getContent(), "NewContent1");
+}
+
+// Test per modificare il titolo di una nota
+TEST(FolderTest, EditNoteTitle) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+
+    folder.addNote(note1);
+    ASSERT_TRUE(folder.editNoteTitle(note1, "NewTitle1"));
+    ASSERT_EQ(note1.getTitle(), "NewTitle1");
+}
