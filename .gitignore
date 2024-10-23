@@ -1,0 +1,64 @@
+# Directory di build CMake
+cmake-build-*/
+build/
+out/
+
+# File di build
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# File di CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# File ninja
+.ninja_deps
+.ninja_log
+build.ninja
+
+# File specifici degli IDE
+## Visual Studio Code
+.vscode/
+.vs/
+*.code-workspace
+
+## JetBrains (CLion)
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# File temporanei
+*.log
+*.tlog
+*.tmp
+*.temp
+
+# File di sistema
+.DS_Store
+Thumbs.db
+
+# File di debug
+*.pdb
+*.ilk
+*.exp
+
+# File di dipendenze generati
+*.d
+
+# Cartelle di dipendenze esterne (modifica se necessario)
+# extern/
+# third_party/
