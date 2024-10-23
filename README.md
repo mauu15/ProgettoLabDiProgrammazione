@@ -1,26 +1,44 @@
 # Progetto Note Manager
 
-## Implementato
 
 1. **Classe Note**
-    - Attributi: titolo, testo, stato di blocco, stato di preferito.
-    - Metodi: costruttore, getter e setter per titolo e testo, metodi per bloccare/sbloccare, aggiungere/rimuovere dai preferiti, operatore di uguaglianza per confrontare note.
+    - [x] Attributi: titolo, testo, stato di blocco, stato di preferito.
+    - [x] Costruttore: titolo e testo.
+    - [x] Metodi: blocca/sblocca, aggiungi/rimuovi dai preferiti, operatore di uguaglianza per confrontare note.
+    - [x] Test
+    - [ ] Una nota inserita nei preferiti viene messa anche in un folder speciale "favouriteList”
 
-## Da Implementare
+2.  **Folder**:
 
-1. **Classe Note**
-   - se la nota viene segnata come preferita, viene messa anche in una cartella "favoriteList”
+- [x] costruttore
+- [x] metodo per aggiungere/rimuovere note
+- [x] metodo per ottenere la lista di tutte le note (restituisce i titoli e la cartella a cui appartengono) (getAllNotesList)
+- [x] metodo per bloccare una nota
+- [ ] metodo per sbloccare una nota _TEST NON FUNZIONANTE_
 
 
-2. **Classe Folder**
-    - Attributi: nome della collezione, vettore di puntatori a oggetti Note.
-    - Metodi: costruttore, metodo per aggiungere/rimuovere note, metodo per ottenere la lista di note, metodo per contare le note, metodo per ottenere una lista di note preferite, metodo per ottenere una lista di note che contengono una parola data, metodo findNotesByContent per cercare note in base al contenuto, metodo findNoteByTitle per cercare una nota per titolo e specificare in quale collezione si trova.
-    - Test
+- [x] metodo per gestire le note preferite
+- [ ] metodo per ottenere una lista di note preferite (listFavorites) _TEST NON FUNZIONANTE_
+- [ ] metodo per ottenere una lista di note bloccate (listBlocked) _TEST NON FUNZIONANTE_
 
+
+- [x] metodo per modificare il contenuto di una nota, se non è bloccata (editNoteText)
+- [x] metodo per modificare il titolo di una nota, se non è bloccata (editNoteTitle)
+
+
+- [x] metodo per ottenere una lista di note che contengono una parola data (cerca tra titoli e contenuto) (findNotes)
+ 
+
+   _Da valutare:_
+- [ ] metodo findNotesByContent per cercare note in base al contenuto
+- [ ] metodo findNoteByTitle per cercare una nota per titolo e specificare in quale collezione si trova
+
+
+- [ ] metodi clearBlockedNotes‎ e clearFavoriteNotes‎
 
 3. **Observer**
-   - Implementare un observer per indicare quante note stanno in una collezione. 
+   - [ ] Implementare un observer per indicare quante note stanno in una collezione. 
 
 
 4. **Subject**
-   - Implementare un subject per notificare l'observer.
+   - [ ] Implementare un subject per notificare l'observer.
