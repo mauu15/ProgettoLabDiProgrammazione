@@ -10,31 +10,31 @@
 
 2.  **Folder**:
 
-- [x] costruttore
-- [x] metodo per aggiungere/rimuovere note
-- [x] metodo per ottenere la lista di tutte le note (restituisce i titoli e la cartella a cui appartengono) (getAllNotesList)
-- [x] metodo per bloccare una nota
-- [ ] metodo per sbloccare una nota _TEST NON FUNZIONANTE_
+   - [x] costruttore
+   - [x] metodo per aggiungere/rimuovere note
+   - [x] metodo per ottenere la lista di tutte le note (restituisce i titoli e la cartella a cui appartengono) (getAllNotesList)
+   - [x] metodo per bloccare una nota
+   - [ ] metodo per sbloccare una nota _TEST NON FUNZIONANTE_
 
 
-- [x] metodo per gestire le note preferite
-- [ ] metodo per ottenere una lista di note preferite (listFavorites) _TEST NON FUNZIONANTE_
-- [ ] metodo per ottenere una lista di note bloccate (listBlocked) _TEST NON FUNZIONANTE_
+   - [x] metodo per gestire le note preferite
+     - [ ] metodo per ottenere una lista di note preferite (listFavorites) _TEST NON FUNZIONANTE_
+     - [ ] metodo per ottenere una lista di note bloccate (listBlocked) _TEST NON FUNZIONANTE_
 
 
-- [x] metodo per modificare il contenuto di una nota, se non è bloccata (editNoteText)
-- [x] metodo per modificare il titolo di una nota, se non è bloccata (editNoteTitle)
+   - [x] metodo per modificare il contenuto di una nota, se non è bloccata (editNoteText)
+   - [x] metodo per modificare il titolo di una nota, se non è bloccata (editNoteTitle)
 
 
-- [x] metodo per ottenere una lista di note che contengono una parola data (cerca tra titoli e contenuto) (findNotes)
+   - [x] metodo per ottenere una lista di note che contengono una parola data (cerca tra titoli e contenuto) (findNotes)
  
 
    _Da valutare:_
-- [ ] metodo findNotesByContent per cercare note in base al contenuto
-- [ ] metodo findNoteByTitle per cercare una nota per titolo e specificare in quale collezione si trova
+   - [ ] metodo findNotesByContent per cercare note in base al contenuto
+   - [ ] metodo findNoteByTitle per cercare una nota per titolo e specificare in quale collezione si trova
 
 
-- [ ] metodi clearBlockedNotes‎ e clearFavoriteNotes‎
+   - [ ] metodi clearBlockedNotes‎ e clearFavoriteNotes‎
 
 3. **Observer**
    - [ ] Implementare un observer per indicare quante note stanno in una collezione. 
