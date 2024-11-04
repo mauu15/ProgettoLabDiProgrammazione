@@ -26,7 +26,7 @@ public:
     // Notifica tutti gli osservatori nella lista
     virtual void notifyObservers() {
         for (auto observer : observerList) {
-            observer->update();
+            observer->update(*this);  // Passa il riferimento all'oggetto corrente
         }
     }
 };
