@@ -2,13 +2,14 @@
 
 
 1. **Classe Note**
+
     - [x] Attributi: titolo, testo, stato di blocco, stato di preferito.
     - [x] Costruttore: titolo e testo.
     - [x] Metodi: blocca/sblocca, aggiungi/rimuovi dai preferiti, operatore di uguaglianza per confrontare note.
     - [x] Test
-    - [ ] Una nota inserita nei preferiti viene messa anche in un folder speciale "favouriteList”
 
-2.  **Folder**:
+
+2. **Folder**:
 
    - [x] costruttore
    - [x] metodo per aggiungere/rimuovere note
@@ -27,14 +28,7 @@
 
 
    - [x] metodo per ottenere una lista di note che contengono una parola data (cerca tra titoli e contenuto) (findNotes)
- 
 
-   _Da valutare:_
-   - [ ] metodo findNotesByContent per cercare note in base al contenuto
-   - [ ] metodo findNoteByTitle per cercare una nota per titolo e specificare in quale collezione si trova
-
-
-   - [ ] metodi clearBlockedNotes‎ e clearFavoriteNotes‎
 
 3. **Observer**
    - [ ] Implementare un observer per indicare quante note stanno in una collezione. 
