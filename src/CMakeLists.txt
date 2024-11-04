@@ -1,6 +1,8 @@
 add_library(Note Note.cpp Folder.cpp
         Subject.h
-        Observer.h)
+        Observer.h
+        ConcreteObserver.cpp
+        ConcreteObserver.h)
 
 # Abilita Google Test se non è già stato fatto in tst
 include(FetchContent)
