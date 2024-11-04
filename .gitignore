@@ -58,7 +58,3 @@ Thumbs.db
 
 # File di dipendenze generati
 *.d
-
-# Cartelle di dipendenze esterne (modifica se necessario)
-# extern/
-# third_party/
