@@ -31,8 +31,8 @@
 
 
 3. **Observer**
-   - [ ] Implementare un observer per indicare quante note stanno in una collezione. 
+   - [x] Implementare un observer per indicare quante note stanno in una collezione. 
 
 
 4. **Subject**
-   - [ ] Implementare un subject per notificare l'observer.
+   - [x] Implementare un subject per notificare l'observer.
