@@ -172,6 +172,7 @@ void Folder::removeObserver(Observer *o) {
 
 void Folder::notifyObservers() {
     for (auto observer : observerList) {
-        observer->update();
+        observer->update(*this);  // Passa il riferimento al Folder corrente
     }
+
 }
