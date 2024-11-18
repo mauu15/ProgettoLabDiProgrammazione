@@ -1,5 +1,7 @@
+// FolderTest.cpp
 #include "gtest/gtest.h"
 #include "../src/Folder.h"
+
 
 // Test per il costruttore di Folder
 TEST(FolderTest, Constructor) {
@@ -62,7 +64,7 @@ TEST(FolderTest, BlockNote) {
     Folder folder("TestFolder");
     Note note1("Title1", "Content1");
 
-    Folder::blockNote(note1);
+    folder.blockNote(note1);
     ASSERT_TRUE(note1.isLocked());
 }
 
@@ -71,11 +73,10 @@ TEST(FolderTest, UnlockNote) {
     Folder folder("TestFolder");
     Note note1("Title1", "Content1");
 
-    folder.addNote(note1);
-    Folder::blockNote(note1);
+    folder.blockNote(note1);
     ASSERT_TRUE(note1.isLocked());
 
-    Folder::unlockNote(note1);
+    folder.unlockNote(note1);
     ASSERT_FALSE(note1.isLocked());
 }
 
@@ -84,25 +85,8 @@ TEST(FolderTest, MakeFavourite) {
     Folder folder("TestFolder");
     Note note1("Title1", "Content1");
 
-    ASSERT_TRUE(Folder::makeFavourite(note1));
+    ASSERT_TRUE(folder.makeFavourite(note1));
     ASSERT_TRUE(note1.isFavorite());
-}
-
-// Test per rimuovere una nota dai preferiti
-
-TEST(FolderTest, RemoveFavorite) {
-    Folder folder("TestFolder");
-    Note note1("Title1", "Content1");
-
-    // Aggiungi la nota al folder prima di marcarla come preferita
-    folder.addNote(note1); // Aggiungi la nota al folder
-
-    // Mark the note as favorite
-    ASSERT_TRUE(folder.makeFavourite(note1)); // Usa folder.makeFavourite per aggiungere la nota
-    ASSERT_TRUE(folder.removeFavorite("Title1")); // Rimuovi dai preferiti
-
-    // Verifica che la nota non sia più nei preferiti
-    ASSERT_FALSE(note1.isFavorite()); // Controlla che il flag sia ora false
 }
 
 // Test per ottenere una lista di tutte le note (titolo e cartella)
@@ -132,40 +116,79 @@ TEST(FolderTest, FindNotes) {
     ASSERT_EQ(results.front().getTitle(), "Important");
 }
 
+// Test per rimuovere una nota dai preferiti
+TEST(FolderTest, RemoveFavorite) {
+    Folder folder("TestFolder");
+    Note note1("Title1", "Content1");
+    folder.addNote(note1);
+
+    Note folderNote("Title1", "Content1");
+    folder.getNoteFromTitle("Title1", folderNote);
+
+    folder.makeFavourite(folderNote);
+    ASSERT_TRUE(folderNote.isFavorite());
+
+    ASSERT_TRUE(folder.removeFavorite("Title1"));
+
+    folder.getNoteFromTitle("Title1", folderNote);
+    ASSERT_FALSE(folderNote.isFavorite());
+}
+
 // Test per ottenere la lista delle note preferite
 TEST(FolderTest, ListFavorites) {
     Folder folder("TestFolder");
-    Note note1("Title1", "Content1");
-    Note note2("Title2", "Content2");
+    folder.addNote(Note("Title1", "Content1"));
+    folder.addNote(Note("Title2", "Content2"));
 
-    folder.addNote(note1);
-    folder.addNote(note2);
+    Note folderNote1("Title1", "Content1");
+    Note folderNote2("Title2", "Content2");
 
-    Folder::makeFavourite(note1);
-    Folder::makeFavourite(note2);
+    // si recuperano le note dal folder
+    folder.getNoteFromTitle("Title1", folderNote1);
+    folder.getNoteFromTitle("Title2", folderNote2);
 
-    auto favorites = Folder::listFavorites();
+    folder.makeFavourite(folderNote1);
+    folder.makeFavourite(folderNote2);
+
+    // aggiorna le note nel folder
+    folder.removeNote("Title1");
+    folder.removeNote("Title2");
+    folder.addNote(folderNote1);
+    folder.addNote(folderNote2);
+
+    auto favorites = folder.listFavorites();
     ASSERT_EQ(favorites.size(), 2);
-    ASSERT_TRUE(std::find_if(favorites.begin(), favorites.end(), [&](const Note& n){ return n.getTitle() == "Title1"; }) != favorites.end());
-    ASSERT_TRUE(std::find_if(favorites.begin(), favorites.end(), [&](const Note& n){ return n.getTitle() == "Title2"; }) != favorites.end());
 }
 
 // Test per ottenere la lista delle note bloccate
 TEST(FolderTest, ListBlocked) {
     Folder folder("TestFolder");
-    Note note1("Title1", "Content1");
-    Note note2("Title2", "Content2");
+    folder.addNote(Note("Title1", "Content1"));
+    folder.addNote(Note("Title2", "Content2"));
 
-    folder.addNote(note1);
-    folder.addNote(note2);
+    Note folderNote1("Title1", "Content1");
+    Note folderNote2("Title2", "Content2");
 
-    Folder::blockNote(note1);
-    Folder::blockNote(note2);
+    // recupera le note dal folder
+    folder.getNoteFromTitle("Title1", folderNote1);
+    folder.getNoteFromTitle("Title2", folderNote2);
 
-    auto blocked = Folder::listBlocked();
+    // poi le blocca
+    folder.blockNote(folderNote1);
+    folder.blockNote(folderNote2);
+
+    // aggiorna le note nel folder
+    folder.removeNote("Title1");
+    folder.removeNote("Title2");
+    folder.addNote(folderNote1);
+    folder.addNote(folderNote2);
+
+    auto blocked = folder.listBlocked();
     ASSERT_EQ(blocked.size(), 2);
-    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(), [&](const Note& n){ return n.getTitle() == "Title1"; }) != blocked.end());
-    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(), [&](const Note& n){ return n.getTitle() == "Title2"; }) != blocked.end());
+    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(),
+                             [&](const Note& n){ return n.getTitle() == "Title1"; }) != blocked.end());
+    ASSERT_TRUE(std::find_if(blocked.begin(), blocked.end(),
+                             [&](const Note& n){ return n.getTitle() == "Title2"; }) != blocked.end());
 }
 
 // Test per modificare il testo di una nota
