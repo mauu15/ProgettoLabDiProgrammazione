@@ -1,9 +1,8 @@
+// Folder.cpp
 #include "Folder.h"
+#include "Note.h"
 #include <algorithm>
 #include <iostream>
-
-std::list<Note> Folder::favoriteNotes;
-std::list<Note> Folder::blockedNotes;
 
 // Restituisce il nome del folder
 const std::string &Folder::getName() const {
@@ -104,19 +103,17 @@ std::list<Note> Folder::findNotes(const std::string &keyword) const {
 // Metodo per bloccare una nota
 void Folder::blockNote(Note &note) {
     note.lock();
-    blockedNotes.push_back(note);
 }
 
 // Sblocca una nota
-void Folder::unlockNote(const Note &note) {
-    blockedNotes.remove(note);
+void Folder::unlockNote(Note &note) {
+    note.unlock();
 }
 
 // Aggiunge una nota ai preferiti
 bool Folder::makeFavourite(Note &note) {
     if (!note.isLocked() && !note.isFavorite()) {
         note.addToFavorites();
-        favoriteNotes.push_back(note);
         return true;
     }
     return false;
@@ -124,41 +121,39 @@ bool Folder::makeFavourite(Note &note) {
 
 // Rimuove una nota dai preferiti
 bool Folder::removeFavorite(const std::string &title) {
-    auto it = std::find_if(favoriteNotes.begin(), favoriteNotes.end(), [&](const Note& n){ return n.getTitle() == title; });
+    auto it = std::find_if(notesList.begin(), notesList.end(),
+                           [&title](const Note& n) { return n.getTitle() == title; });
 
-    if (it != favoriteNotes.end()) {
+    if (it != notesList.end()) {
         if (!it->isLocked()) {
-            it->removeFromFavorites();  // Aggiorna lo stato della nota
-            favoriteNotes.erase(it);     // Rimuove la nota dai preferiti
+            it->removeFromFavorites();
+            notifyObservers();
             return true;
-        } else {
-            std::cout << "Stai cercando di cancellare dai preferiti una nota bloccata. Se desideri proseguire, prima dovrai procedere a sbloccarla." << std::endl;
-            return false;
         }
     }
-
-    std::cout << "Nota non trovata nei preferiti." << std::endl;
     return false;
 }
 
-// Restituisce la lista delle note bloccate
-std::list<Note> Folder::listBlocked() {
-    return blockedNotes;
-}
-
 // Restituisce la lista delle note preferite
-std::list<Note> Folder::listFavorites() {
-    return favoriteNotes;
+std::list<Note> Folder::listFavorites() const {
+    std::list<Note> favorites;
+    for (const auto &note : notesList) {
+        if (note.isFavorite()) {
+            favorites.push_back(note);
+        }
+    }
+    return favorites;
 }
 
-// Restituisce la dimensione delle note preferite
-int Folder::getFavouriteSize() {
-    return favoriteNotes.size();
-}
-
-// Restituisce la dimensione delle note bloccate
-int Folder::getBlockedSize() {
-    return blockedNotes.size();
+// Restituisce la lista delle note bloccate
+std::list<Note> Folder::listBlocked() const {
+    std::list<Note> blocked;
+    for (const auto &note : notesList) {
+        if (note.isLocked()) {
+            blocked.push_back(note);
+        }
+    }
+    return blocked;
 }
 
 // Gestione degli osservatori
@@ -174,5 +169,4 @@ void Folder::notifyObservers() {
     for (auto observer : observerList) {
         observer->update(*this);  // Passa il riferimento al Folder corrente
     }
-
 }
