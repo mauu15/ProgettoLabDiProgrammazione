@@ -14,13 +14,15 @@
    - [x] costruttore
    - [x] metodo per aggiungere/rimuovere note
    - [x] metodo per ottenere la lista di tutte le note (restituisce i titoli e la cartella a cui appartengono) (getAllNotesList)
-   - [x] metodo per bloccare una nota
-   - [ ] metodo per sbloccare una nota _TEST NON FUNZIONANTE_
+   - [x] metodo per bloccare una nota (blockNote)
+   - [x] metodo per sbloccare una nota (unblockNote)
 
 
    - [x] metodo per gestire le note preferite
-     - [ ] metodo per ottenere una lista di note preferite (listFavorites) _TEST NON FUNZIONANTE_
-     - [ ] metodo per ottenere una lista di note bloccate (listBlocked) _TEST NON FUNZIONANTE_
+     - [x] metodo per aggiungere una nota ai preferiti (makeFavourite)
+     - [x] metodo per rimuovere una nota dai preferiti (removeFavourite)
+     - [x] metodo per ottenere una lista di note preferite (listFavorites)
+     - [x] metodo per ottenere una lista di note bloccate (listBlocked) 
 
 
    - [x] metodo per modificare il contenuto di una nota, se non è bloccata (editNoteText)
