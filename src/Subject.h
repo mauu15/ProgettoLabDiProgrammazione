@@ -23,12 +23,8 @@ public:
         observerList.remove(o);
     }
 
-    // Notifica tutti gli osservatori nella lista
-    virtual void notifyObservers() {
-        for (auto observer : observerList) {
-            observer->update(*this);  // Passa il riferimento all'oggetto corrente
-        }
-    }
+    // Metodo puramente virtuale per notificare gli osservatori
+    virtual void notifyObservers() = 0;
 };
 
 #endif // SUBJECT_H
