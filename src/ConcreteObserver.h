@@ -21,7 +21,7 @@ public:
     // Distruttore che rimuove l'osservatore da tutti i Folder a cui è iscritto
     ~ConcreteObserver() override;
 
-    void update(const Subject &subject) override; // Metodo per aggiornare l'osservatore
+    void update(const Folder &folder) override; // Metodo per aggiornare l'osservatore
 
     // Metodo per iscrivere l'osservatore a un Folder
     void subscribe(Folder* folder);
