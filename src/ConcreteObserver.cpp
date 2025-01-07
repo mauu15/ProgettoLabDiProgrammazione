@@ -10,13 +10,9 @@ ConcreteObserver::~ConcreteObserver() {
     }
 }
 
-void ConcreteObserver::update(const Subject& subject) {
-    // Usa dynamic_cast per convertire il riferimento a Subject in un riferimento a Folder
-    const Folder* folder = dynamic_cast<const Folder*>(&subject);
-    if (folder) {
-        int numNotes = folder->getSize(); // Ottiene il numero di note presenti nel folder
-        std::cout << "Il folder contiene " << numNotes << " note.\n";
-    }
+void ConcreteObserver::update(const Folder& folder) {
+    int numNotes = folder.getSize(); // Ottiene il numero di note presenti nel folder
+    std::cout << "Il folder contiene " << numNotes << " note.\n";
 }
 
 void ConcreteObserver::subscribe(Folder* folder) {
