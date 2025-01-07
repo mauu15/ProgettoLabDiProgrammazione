@@ -1,15 +1,13 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-class Subject; //forward declaration
-
+class Folder;
 
 // Interfaccia Observer
 class Observer {
 public:
     virtual ~Observer() = default;
-    // Metodo che verrà chiamato per aggiornare l'osservatore
-    virtual void update(const Subject& subject) = 0;
+    virtual void update(const Folder &folder) = 0; // Metodo puramente virtuale
 };
 
 #endif // OBSERVER_H
